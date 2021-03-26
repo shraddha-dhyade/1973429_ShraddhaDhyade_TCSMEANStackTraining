@@ -1,0 +1,12 @@
+<div class="col-4">
+    <form #loginRef="ngForm" (ngSubmit)="getLoginInfo(loginRef.value)" class="mb-3">
+        <label class="form-label">UserName </label>
+        <input class="form-control" type="text" name="user" ngModel/><br/>
+        <label class="form-label">Password </label>
+        <input class="form-control" type="text" name="pass" ngModel><br/>
+        <input  class="btn btn-primary" type="submit" value="Login"><br/>
+    </form>
+</div>
+<div>
+    <a routerLink="../signup">Sign Up</a>
+</div>
