@@ -1,8 +1,16 @@
 <div [formGroup]="form">
-    <label [attr.for]="question.id">{{question.id}}: {{question.desc}}</label>
-    <div *ngFor="let option of question.options">
-    <input type="radio"  [value]="option.id" [name]="question.id" [formControlName]="question.id"    />
-    <label [attr.for]="option.id">{{option.desc}}</label><br/>
-    </div>
-    <input type="text" value="Save" (click)="onSave(question.id)"/><hr/>
+    <mat-card>
+        <mat-card-content>
+    <label [attr.for]="question.id">{{question.id}}: {{question.desc}}</label><br/>
+    <mat-radio-group [formControlName]="question.id">
+        <div *ngFor="let option of question.options">
+            <mat-radio-button  [value]="option.id" [name]="question.id"></mat-radio-button>
+            <label [attr.for]="option.id">{{option.desc}}</label><br/>
+        </div>
+    </mat-radio-group>
+    </mat-card-content>
+    <mat-card-actions>
+        <input style="background-color:rgb(101, 101, 173); color: white;" type="button" value="Save" (click)="onSave(question.id)"/>
+    </mat-card-actions>
+    </mat-card>
 </div>

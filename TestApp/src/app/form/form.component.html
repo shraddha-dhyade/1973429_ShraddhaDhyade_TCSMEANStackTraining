@@ -1,8 +1,14 @@
 <div>
+    <mat-card>
     <form (ngSubmit)="onSubmit()" [formGroup]="form">
+        <mat-card-content>
         <div *ngFor="let question of questions">
             <app-question [question]="question" [form]="form" (updateScore)="getScore($event)"></app-question>
         </div>
-        <input type="submit"/>
+        </mat-card-content>
+        <mat-card-actions>
+        <button mat-raised-button color="warn" type="submit">Submit</button>
+        </mat-card-actions>
     </form>
+    </mat-card> 
 </div>

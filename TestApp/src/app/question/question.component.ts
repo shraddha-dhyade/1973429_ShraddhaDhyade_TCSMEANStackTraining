@@ -34,7 +34,7 @@ export class QuestionComponent{
         alert("Correct Answer!")
       }
       else{
-        alert("Incorrect Answer!")
+        alert("Incorrect Answer! Correct Answer is " + this.question.options[eval(ans)-1].desc +"." )
       }
       this.form.controls[id].disable()
       this.updateScore.emit(this.score) 

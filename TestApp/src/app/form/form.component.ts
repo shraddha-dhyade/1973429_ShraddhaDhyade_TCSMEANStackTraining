@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit,EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {Question} from '../question.model'
 import { QuestionService } from '../question.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -10,13 +11,18 @@ import { QuestionService } from '../question.service';
 })
 export class FormComponent implements OnInit {
 
+  // @Output() sendScore =new EventEmitter();
   questions:Array<Question>=[]
   form:FormGroup;
   score:number;
-  constructor(public qServ:QuestionService) {
+  status:string;
+  total:number;
+  constructor(public qServ:QuestionService, public router:Router) {
     this.toQuestions()
-    this.form= this.toFormGroup()
+    this.form= new FormGroup({})
     this.score=0;
+    this.status=""
+    this.total=0
    }
 
   ngOnInit(): void {
@@ -24,17 +30,18 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit():void{
-    let total=this.questions.length
+    this.total=this.questions.length
     let scoreTotal=this.score
-    let status= (scoreTotal>(total/2))?"Passed!":"Failed!";
-    alert("Your score is "+ scoreTotal + "/" + total +". You have " + status );
+    this.status= (scoreTotal>(this.total/2))?"Pass!":"Fail!";
+    // this.sendScore.emit(this.score)
+    alert("Your score is "+ scoreTotal + "/" + this.total +". Your Test Status is " + this.status );
+    // this.router.navigate(["score"]);
   }
 
   toQuestions():void{
     this.qServ.loadQuestions().subscribe(result=>{
       this.questions=result;
       this.form= this.toFormGroup();
-      console.log(this.form)
     })
   }
 
