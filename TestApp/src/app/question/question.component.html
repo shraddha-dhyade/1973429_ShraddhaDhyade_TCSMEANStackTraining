@@ -1,7 +1,8 @@
 <div [formGroup]="form">
-    <label [attr.for]="question.id">{{question.desc}}</label>
-    <!-- <input type="radio" *ngFor="let option of question.options" [value]="option.id" [name]="'q'+question.id" [formControlName]="'q' + question.id"/> -->
-    <!-- <input type="button" value="save" [formControlName]="'save' + question.id"/> -->
-   <input type="radio" *ngFor="let option of question.options" [value]="option.id" [name]="question.id" [formControlName]="question.id"/>
-    <input type="button" value="save" (click)="onSave(question.id)"/>
+    <label [attr.for]="question.id">{{question.id}}: {{question.desc}}</label>
+    <div *ngFor="let option of question.options">
+    <input type="radio"  [value]="option.id" [name]="question.id" [formControlName]="question.id"    />
+    <label [attr.for]="option.id">{{option.desc}}</label><br/>
+    </div>
+    <input type="text" value="Save" (click)="onSave(question.id)"/><hr/>
 </div>

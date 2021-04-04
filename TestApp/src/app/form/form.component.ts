@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Form, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import {Question} from '../question.model'
 import { QuestionService } from '../question.service';
 
@@ -10,19 +10,25 @@ import { QuestionService } from '../question.service';
 })
 export class FormComponent implements OnInit {
 
-  @Input() questions:Array<Question>=[]
+  questions:Array<Question>=[]
   form:FormGroup;
+  score:number;
   constructor(public qServ:QuestionService) {
     this.toQuestions()
     this.form= this.toFormGroup()
-   // console.log(this.form);
+    this.score=0;
    }
 
   ngOnInit(): void {
     this.form= this.toFormGroup()
   }
 
-  onSubmit():void{}
+  onSubmit():void{
+    let total=this.questions.length
+    let scoreTotal=this.score
+    let status= (scoreTotal>(total/2))?"Passed!":"Failed!";
+    alert("Your score is "+ scoreTotal + "/" + total +". You have " + status );
+  }
 
   toQuestions():void{
     this.qServ.loadQuestions().subscribe(result=>{
@@ -35,12 +41,12 @@ export class FormComponent implements OnInit {
   toFormGroup():FormGroup{
     const group: any = {};
     this.questions.forEach(question=>{
-      // const questionsGroup: any = {};
-      // questionsGroup["q"+question.id]=new FormControl("q" + question.id)
-      // questionsGroup["save"+question.id]=new FormControl("save"+question.id)
-      // group[question.id]=new FormGroup(questionsGroup)
       group[question.id] = new FormControl(question.id)
     });
     return new FormGroup(group);
+  }
+
+  getScore($event:any):void{
+    this.score+=$event;
   }
 }
