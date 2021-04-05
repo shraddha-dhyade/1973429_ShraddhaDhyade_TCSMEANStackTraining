@@ -12,4 +12,8 @@ export class ToDoTaskComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  storeTask(taskRef:any){
+    console.log(taskRef)
+  }
+
 }
