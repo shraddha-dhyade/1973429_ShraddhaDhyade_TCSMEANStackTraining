@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/JavaScript">
+        var socket=io()
+        function sendMsg(socket,pname,msg){
+            
+            // socket.emit("chat message","Welcome to WebSocket using socketio app")
+            // socket.emit("chat",{"name":"shraddha","age":25})
+            socket.emit("chat","Hello "+pname+", Your Message is "+"'"+msg+"'")
+        }
+    </script>
+</head>
+<body>
+    <h1>Chat Log</h1>
+    <script type="text/JavaScript">
+        var socket=io()
+    </script>
+    <form>
+        <label for="pname">Name</label>
+        <input type="text" name="pname"/><br/>
+        <label for="msg">Message</label>
+        <input type="textarea" name="msg"/><br/>
+        <input type="submit" onclick="sendMsg(socket,pname.value,msg.value)">
+    </form>
+
+</body>
+</html>
