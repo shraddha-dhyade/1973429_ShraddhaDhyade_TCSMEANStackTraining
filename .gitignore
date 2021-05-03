@@ -58,3 +58,6 @@ ConnectingMongoDB/*.png
 ChatLog/Report.docx
 ChatLog/SourceCode.zip
 ChatLog/*.png
+JenkinsPipeline/output.png
+JenkinsPipeline/Report.docx
+JenkinsPipeline/SourceCode.zip
